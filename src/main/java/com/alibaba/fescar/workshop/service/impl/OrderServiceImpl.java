@@ -39,7 +39,6 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author jimin.jm @alibaba-inc.com
  */
-//@EnableAutoDataSourceProxy(useJdkProxy = true)
 public class OrderServiceImpl implements OrderService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);

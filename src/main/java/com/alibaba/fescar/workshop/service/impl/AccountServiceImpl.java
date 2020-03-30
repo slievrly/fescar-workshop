@@ -28,7 +28,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
  *
  * @author jimin.jm @alibaba-inc.com
  */
-//@EnableAutoDataSourceProxy(useJdkProxy = true)
 public class AccountServiceImpl implements AccountService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
