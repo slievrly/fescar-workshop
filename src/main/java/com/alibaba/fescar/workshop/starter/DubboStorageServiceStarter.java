@@ -40,7 +40,7 @@ public class DubboStorageServiceStarter {
         storageContext.getBean("service");
         JdbcTemplate storageJdbcTemplate = (JdbcTemplate)storageContext.getBean("jdbcTemplate");
         storageJdbcTemplate.update("delete from storage_tbl where commodity_code = 'C00321'");
-        if (EnvContext.dbType == DBType.MYSQL) {
+        if (EnvContext.dbType == DBType.MYSQL || EnvContext.dbType == DBType.PGSQL) {
             storageJdbcTemplate.update("insert into storage_tbl(commodity_code, count) values ('C00321', 100)");
         } else if (EnvContext.dbType == DBType.ORACLE) {
             storageJdbcTemplate.update(

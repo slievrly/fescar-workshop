@@ -40,7 +40,7 @@ public class DubboAccountServiceStarter {
         accountContext.getBean("service");
         JdbcTemplate accountJdbcTemplate = (JdbcTemplate)accountContext.getBean("jdbcTemplate");
         accountJdbcTemplate.update("delete from account_tbl where user_id = 'U100001'");
-        if (EnvContext.dbType == DBType.MYSQL) {
+        if (EnvContext.dbType == DBType.MYSQL || EnvContext.dbType == DBType.PGSQL) {
             accountJdbcTemplate.update("insert into account_tbl(user_id, money) values ('U100001', 999)");
         } else if (EnvContext.dbType == DBType.ORACLE) {
             accountJdbcTemplate.update(

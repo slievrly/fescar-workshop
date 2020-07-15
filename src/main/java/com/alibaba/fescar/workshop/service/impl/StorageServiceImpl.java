@@ -51,6 +51,25 @@ public class StorageServiceImpl implements StorageService {
         LOGGER.info("Deducting inventory SQL: update STORAGE_TBL set count = count - {} where commodity_code = {}",
             count, commodityCode);
 
+        //jdbcTemplate.update("insert into SYSDATE_TBL(\"id\",\"gmt_create\") values(7,sysdate)");
+
+        //jdbcTemplate.update("insert into SYSDATE1_TBL(id,gmt_create,test) values(9,sysdate,?)",new String[]{"test"});
+        //多主键
+        //jdbcTemplate.update("insert into tb_multi(KEY2,comment1) values('2','3')");
+        //jdbcTemplate.update("update tb_multi  set comment1='8' where key1 < 5 ");
+        //jdbcTemplate.update("delete  from tb_multi  where key1 < 5 ");
+
+        //Object[] objParam1 = new Object[] {100, 807};
+        //Object[] objParam2 = new Object[] {100, 808};
+        //List<Object[]> params = new ArrayList<>();
+        //params.add(objParam1);
+        //params.add(objParam2);
+        //jdbcTemplate.batchUpdate("update storage_tbl set count=? where id=?", params);
+
+        //jdbcTemplate.update("insert into account_tbl(id, user_id, money) values (default, ?, ?)","123",456);
+
+        //jdbcTemplate.update("insert test_inc values(default, '1')");
+
         jdbcTemplate.update("update storage_tbl set count = count - ? where commodity_code = ?",
             count, commodityCode);
         LOGGER.info("Storage Service End ... ");

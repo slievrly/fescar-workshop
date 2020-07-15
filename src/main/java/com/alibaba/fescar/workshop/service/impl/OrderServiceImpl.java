@@ -106,6 +106,24 @@ public class OrderServiceImpl implements OrderService {
                 }
             }, keyHolder);
             order.id = Long.parseLong(nextID);
+        } else if (EnvContext.dbType == DBType.PGSQL) {
+
+            jdbcTemplate.update(new PreparedStatementCreator() {
+
+                @Override
+                public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                    PreparedStatement pst = con.prepareStatement(
+                        "insert into order_tbl (user_id, commodity_code, count, money) values (?, ?, ?, ?) RETURNING "
+                            + "ID;",
+                        PreparedStatement.RETURN_GENERATED_KEYS);
+                    pst.setObject(1, order.userId);
+                    pst.setObject(2, order.commodityCode);
+                    pst.setObject(3, order.count);
+                    pst.setObject(4, order.money);
+                    return pst;
+                }
+            }, keyHolder);
+            order.id = keyHolder.getKey().longValue();
         }
 
         LOGGER.info("Order Service End ... Created " + order);

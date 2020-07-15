@@ -6,5 +6,6 @@ package com.alibaba.fescar.workshop;
  */
 public enum DBType {
     MYSQL,
-    ORACLE
+    ORACLE,
+    PGSQL
 }

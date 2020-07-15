@@ -1,28 +1,124 @@
+--mysql
 DROP TABLE IF EXISTS `storage_tbl`;
 CREATE TABLE `storage_tbl` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `commodity_code` varchar(255) DEFAULT NULL,
-  `count` int(11) DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY (`commodity_code`)
+`commodity_code` varchar(255) DEFAULT NULL,
+`count` int(11) DEFAULT 0,
+PRIMARY KEY (`id`),
+UNIQUE KEY (`commodity_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `order_tbl`;
 CREATE TABLE `order_tbl` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(255) DEFAULT NULL,
-  `commodity_code` varchar(255) DEFAULT NULL,
-  `count` int(11) DEFAULT 0,
-  `money` int(11) DEFAULT 0,
-  PRIMARY KEY (`id`)
+`user_id` varchar(255) DEFAULT NULL,
+`commodity_code` varchar(255) DEFAULT NULL,
+`count` int(11) DEFAULT 0,
+`money` int(11) DEFAULT 0,
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `account_tbl`;
 CREATE TABLE `account_tbl` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(255) DEFAULT NULL,
-  `money` int(11) DEFAULT 0,
-  PRIMARY KEY (`id`)
+`user_id` varchar(255) DEFAULT NULL,
+`money` int(11) DEFAULT 0,
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--oracle
+-- ----------------------------
+--  Table structure for ACCOUNT_TBL
+-- ----------------------------
+DROP TABLE "TEST"."ACCOUNT_TBL";
+CREATE TABLE "ACCOUNT_TBL"("ID" NUMBER(20, 0)NOT NULL, "USER_ID" VARCHAR2(101BYTE)NOT NULL, "MONEY" NUMBER(20, 0)NOT
+NULL, "INFORMATION" CLOB, "DESCRIPTION" BLOB, "REMARK" NVARCHAR2(100));
+
+-- ----------------------------
+--  Primary key structure for table ACCOUNT_TBL
+-- ----------------------------
+ALTER TABLE "TEST"."ACCOUNT_TBL"
+ADD CONSTRAINT "SYS_C007265" PRIMARY KEY("ID");
+
+-- ----------------------------
+--  Checks structure for table ACCOUNT_TBL
+-- ----------------------------
+ALTER TABLE "TEST"."ACCOUNT_TBL"
+ADD CONSTRAINT "SYS_C007016" CHECK("ID" IS NOT NULL)ENABLE
+ADD CONSTRAINT "SYS_C007017" CHECK("USER_ID" IS NOT NULL)ENABLE
+ADD CONSTRAINT "SYS_C007018" CHECK("MONEY" IS NOT NULL)ENABLE;
+
+-- ----------------------------
+--  Indexes structure for table ACCOUNT_TBL
+-- ----------------------------
+CREATE INDEX TEST."idx_user_id" ON TEST.ACCOUNT_TBL(USER_ID ASC)TABLESPACE SYSTEM LOGGING VISIBLE PCTFREE 10 INITRANS 2
+MAXTRANS 255 STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645 FREELISTS 1 FREELIST GROUPS 1);
+
+DROP TABLE "TEST"."ORDER_TBL";
+CREATE TABLE "ORDER_TBL"("ID" NUMBER(20, 0)NOT NULL, "USER_ID" VARCHAR2(100BYTE)NOT NULL, "COMMODITY_CODE" VARCHAR2(
+100BYTE)NOT NULL, "COUNT" NUMBER(20, 0)NOT NULL, "MONEY" NUMBER(20, 0)NOT NULL);
+
+-- ----------------------------
+--  Primary key structure for table ORDER_TBL
+-- ----------------------------
+ALTER TABLE "TEST"."ORDER_TBL"
+ADD CONSTRAINT "PK_ORDER" PRIMARY KEY("ID");
+
+-- ----------------------------
+--  Checks structure for table ORDER_TBL
+-- ----------------------------
+ALTER TABLE "TEST"."ORDER_TBL"
+ADD CONSTRAINT "SYS_C007024" CHECK("ID" IS NOT NULL)ENABLE
+ADD CONSTRAINT "SYS_C007025" CHECK("USER_ID" IS NOT NULL)ENABLE
+ADD CONSTRAINT "SYS_C007026" CHECK("COMMODITY_CODE" IS NOT NULL)ENABLE
+ADD CONSTRAINT "SYS_C007027" CHECK("COUNT" IS NOT NULL)ENABLE
+ADD CONSTRAINT "SYS_C007028" CHECK("MONEY" IS NOT NULL)ENABLE;
+
+-- ----------------------------
+DROP TABLE "TEST"."STORAGE_TBL";
+CREATE TABLE "STORAGE_TBL"("ID" NUMBER(20, 0)NOT NULL, "COMMODITY_CODE" VARCHAR2(255BYTE)NOT NULL, "COUNT" NUMBER(20, 0)
+NOT NULL);
+
+-- ----------------------------
+--  Primary key structure for table STORAGE_TBL
+-- ----------------------------
+ALTER TABLE "TEST"."STORAGE_TBL"
+ADD CONSTRAINT "SYS_C007419" PRIMARY KEY("ID");
+
+-- ----------------------------
+--  Checks structure for table STORAGE_TBL
+-- ----------------------------
+ALTER TABLE "TEST"."STORAGE_TBL"
+ADD CONSTRAINT "SYS_C007416" CHECK("ID" IS NOT NULL)ENABLE
+ADD CONSTRAINT "SYS_C007417" CHECK("COMMODITY_CODE" IS NOT NULL)ENABLE
+ADD CONSTRAINT "SYS_C007418" CHECK("COUNT" IS NOT NULL)ENABLE;
+
+--pg
+
+DROP TABLE IF EXISTS STORAGE_TBL;
+CREATE TABLE STORAGE_TBL (
+ID  serial primary key,
+COMMODITY_CODE varchar(255) DEFAULT NULL,
+COUNT integer DEFAULT 0,
+unique(COMMODITY_CODE)
+);
+
+
+DROP TABLE IF EXISTS ORDER_TBL;
+CREATE TABLE ORDER_TBL (
+ID  serial primary key,
+USER_ID varchar(255) DEFAULT NULL,
+COMMODITY_CODE varchar(255) DEFAULT NULL,
+COUNT integer DEFAULT 0,
+MONEY integer DEFAULT 0
+);
+
+
+DROP TABLE IF EXISTS ACCOUNT_TBL;
+CREATE TABLE ACCOUNT_TBL (
+ID  serial primary key,
+USER_ID varchar(255) DEFAULT NULL,
+MONEY integer DEFAULT 0
+);
